@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\PacMan\\PacMan\\",
+  "WorkspaceRootPath": "D:\\PacMan\\GRA-SDL2\\PacMan\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\PacMan\\PacMan\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|solutionrelative:PacMan\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\PacMan\\PacMan\\GameLoop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|solutionrelative:PacMan\\GameLoop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\PacMan\\PacMan\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|solutionrelative:PacMan\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A0D5FC5-9DDA-40DC-AE30-0B1A60C96005}|PacMan\\PacMan.vcxproj|solutionrelative:PacMan\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,40 +31,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GameLoop.cpp",
-              "DocumentMoniker": "D:\\PacMan\\PacMan\\PacMan\\GameLoop.cpp",
-              "RelativeDocumentMoniker": "PacMan\\GameLoop.cpp",
-              "ToolTip": "D:\\PacMan\\PacMan\\PacMan\\GameLoop.cpp",
-              "RelativeToolTip": "PacMan\\GameLoop.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-17T07:31:25.977Z",
+              "Title": "GameLoop.h",
+              "DocumentMoniker": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.h",
+              "RelativeDocumentMoniker": "PacMan\\GameLoop.h",
+              "ToolTip": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.h",
+              "RelativeToolTip": "PacMan\\GameLoop.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-17T13:23:33.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GameLoop.h",
-              "DocumentMoniker": "D:\\PacMan\\PacMan\\PacMan\\GameLoop.h",
-              "RelativeDocumentMoniker": "PacMan\\GameLoop.h",
-              "ToolTip": "D:\\PacMan\\PacMan\\PacMan\\GameLoop.h",
-              "RelativeToolTip": "PacMan\\GameLoop.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-17T07:29:06.801Z",
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\main.cpp",
+              "RelativeDocumentMoniker": "PacMan\\main.cpp",
+              "ToolTip": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\main.cpp",
+              "RelativeToolTip": "PacMan\\main.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-17T13:23:23.611Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "main.cpp",
-              "DocumentMoniker": "D:\\PacMan\\PacMan\\PacMan\\main.cpp",
-              "RelativeDocumentMoniker": "PacMan\\main.cpp",
-              "ToolTip": "D:\\PacMan\\PacMan\\PacMan\\main.cpp",
-              "RelativeToolTip": "PacMan\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAPAAAA",
+              "Title": "GameLoop.cpp",
+              "DocumentMoniker": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.cpp",
+              "RelativeDocumentMoniker": "PacMan\\GameLoop.cpp",
+              "ToolTip": "D:\\PacMan\\GRA-SDL2\\PacMan\\PacMan\\GameLoop.cpp",
+              "RelativeToolTip": "PacMan\\GameLoop.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-17T07:16:14.557Z",
+              "WhenOpened": "2024-06-17T13:23:18.151Z",
               "EditorCaption": ""
             }
           ]

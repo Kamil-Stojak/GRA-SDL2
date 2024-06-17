@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\PacMan\PacMan\x64\Debug\GRA.exe</FullPath>
+      <FullPath>D:\PacMan\GRA-SDL2\PacMan\x64\Debug\GRA.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

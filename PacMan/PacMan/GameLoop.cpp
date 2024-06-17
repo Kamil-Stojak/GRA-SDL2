@@ -1,6 +1,12 @@
 #include "GameLoop.h"
 
-GameLoop::GameLoop() : window(nullptr), renderer(nullptr), GameState(false), event1{} {}
+GameLoop::GameLoop()
+{
+    window = NULL;
+    renderer = NULL;
+    GameState = false;
+    
+}
 
 bool GameLoop::getGameState() {
     return GameState;
@@ -16,7 +22,7 @@ void GameLoop::Intialize() {
     if (window) {
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            cout << "uda³o siê" << endl;
+            cout << "udalo sie" << endl;
             GameState = true;
         } else {
             cout << "Renderer creation failed: " << SDL_GetError() << endl;
@@ -30,6 +36,13 @@ void GameLoop::Event() {
     SDL_PollEvent(&event1);
     if (event1.type == SDL_QUIT) {
         GameState = false;
+    }
+    if (event1.type == SDL_MOUSEMOTION)
+    {
+        cout << event1.motion.x << "  X:Y  " << event1.motion.y << endl;
+    }
+    if (event1.type == SDL_MOUSEBUTTONDOWN) {
+        cout << "KLIK!!!" << endl;
     }
 }
 
