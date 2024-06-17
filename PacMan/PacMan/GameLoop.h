@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-using namespace std;
+#include "TextureManager.h"
 
 class GameLoop {
 private:
@@ -12,6 +12,7 @@ private:
     SDL_Window* window;
     SDL_Event event1;
     SDL_Renderer* renderer;
+    SDL_Texture* player;
 public:
     GameLoop();
     bool getGameState();

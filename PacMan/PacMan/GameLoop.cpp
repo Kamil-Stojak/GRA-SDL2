@@ -1,12 +1,7 @@
 #include "GameLoop.h"
+#include "TextureManager.h"
 
-GameLoop::GameLoop()
-{
-    window = NULL;
-    renderer = NULL;
-    GameState = false;
-    
-}
+GameLoop::GameLoop() : GameState(false), window(nullptr), renderer(nullptr), player(nullptr) {}
 
 bool GameLoop::getGameState() {
     return GameState;
@@ -14,7 +9,7 @@ bool GameLoop::getGameState() {
 
 void GameLoop::Intialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        cout << "SDL Initialization Failed: " << SDL_GetError() << endl;
+        std::cout << "SDL Initialization Failed: " << SDL_GetError() << std::endl;
         return;
     }
 
@@ -22,13 +17,19 @@ void GameLoop::Intialize() {
     if (window) {
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            cout << "udalo sie" << endl;
+            std::cout << "udalo sie" << std::endl;
+            player = TextureManager::Texture("Image/shiba.png", renderer);
+            if (player == nullptr) {
+                std::cout << "Failed to load texture" << std::endl;
+                GameState = false;
+                return;
+            }
             GameState = true;
         } else {
-            cout << "Renderer creation failed: " << SDL_GetError() << endl;
+            std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl;
         }
     } else {
-        cout << "Window creation failed: " << SDL_GetError() << endl;
+        std::cout << "Window creation failed: " << SDL_GetError() << std::endl;
     }
 }
 
@@ -37,21 +38,22 @@ void GameLoop::Event() {
     if (event1.type == SDL_QUIT) {
         GameState = false;
     }
-    if (event1.type == SDL_MOUSEMOTION)
-    {
-        cout << event1.motion.x << "  X:Y  " << event1.motion.y << endl;
+    if (event1.type == SDL_MOUSEMOTION) {
+        std::cout << event1.motion.x << "  X:Y  " << event1.motion.y << std::endl;
     }
     if (event1.type == SDL_MOUSEBUTTONDOWN) {
-        cout << "KLIK!!!" << endl;
+        std::cout << "KLIK!!!" << std::endl;
     }
 }
 
 void GameLoop::Render() {
     SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, player, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
 
 void GameLoop::Clear() {
+    SDL_DestroyTexture(player);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

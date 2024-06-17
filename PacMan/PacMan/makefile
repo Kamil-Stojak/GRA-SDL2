@@ -1,20 +1,20 @@
-# Compiler
+# Kompilator
 CXX = g++
 
-# Compiler flags
+# Flagi kompilatora
 CXXFLAGS = -std=c++11 -Wall -g
 
-# SDL2 flags
+# Flagi dla SDL2 i SDL2_image
 SDL2_CFLAGS = -IC:/msys64/mingw64/include/SDL2 -Dmain=SDL_main
-SDL2_LDFLAGS = -LC:/msys64/mingw64/lib -lmingw32 -mwindows -lSDL2main -lSDL2
+SDL2_LDFLAGS = -LC:/msys64/mingw64/lib -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image
 
-# Source files
-SRCS = GameLoop.cpp main.cpp
+# Pliki źródłowe
+SRCS = GameLoop.cpp main.cpp TextureManager.cpp
 
-# Object files
+# Pliki obiektowe
 OBJS = $(SRCS:.cpp=.o)
 
-# Executable
+# Nazwa pliku wykonywalnego
 TARGET = GRA
 
 all: $(TARGET)
