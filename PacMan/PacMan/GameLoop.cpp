@@ -46,9 +46,22 @@ void GameLoop::Event() {
     }
 }
 
+void GameLoop::Update(){
+//wielkość postaci
+srcPlayer.h = 60;
+srcPlayer.w = 60;
+srcPlayer.x = srcPlayer.y = 0;
+
+//Gdzie się spawni postać
+destPlayer.w = 80;
+destPlayer.h = 80;
+destPlayer.x = destPlayer.y = 10;
+
+}
+
 void GameLoop::Render() {
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, player, NULL, NULL);
+    SDL_RenderCopy(renderer, player, &srcPlayer, &destPlayer);
     SDL_RenderPresent(renderer);
 }
 

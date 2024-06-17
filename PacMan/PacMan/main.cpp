@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
     while (g->getGameState()) {
         g->Event();
         g->Render();
+        g->Update();
     }
 
     g->Clear();
