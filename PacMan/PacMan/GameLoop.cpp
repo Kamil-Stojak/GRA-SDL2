@@ -19,6 +19,7 @@ void GameLoop::Intialize() {
         if (renderer) {
             std::cout << "udalo sie" << std::endl;
             player = TextureManager::Texture("Image/shiba.png", renderer);
+            background = TextureManager::Texture("Image/TLO2.png", renderer);
             if (player == nullptr) {
                 std::cout << "Failed to load texture" << std::endl;
                 GameState = false;
@@ -55,13 +56,16 @@ srcPlayer.x = srcPlayer.y = 0;
 //Gdzie się spawni postać
 destPlayer.w = 80;
 destPlayer.h = 80;
-destPlayer.x = destPlayer.y = 10;
+destPlayer.x = 10; 
+destPlayer.y++;
 
 }
 
 void GameLoop::Render() {
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, player, &srcPlayer, &destPlayer);
+       SDL_RenderCopy(renderer, background, NULL, NULL); 
+       SDL_RenderCopy(renderer, player, &srcPlayer, &destPlayer);
+
     SDL_RenderPresent(renderer);
 }
 
