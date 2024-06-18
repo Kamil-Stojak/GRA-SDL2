@@ -1,20 +1,19 @@
+#include <SDL.h>
+#include <iostream>
 #include "GameLoop.h"
 
-GameLoop* g = new GameLoop();
+GameLoop game;
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
+    game.Intialize();
 
-    g->Intialize();
-
-    while (g->getGameState()) {
-        g->Event();
-        g->Render();
-        g->Update();
+    while (game.getGameState()) {
+        game.Event();
+        game.Update();
+        game.Render();
     }
 
-    g->Clear();
-
-    delete g;
+    game.Clear();
 
     return 0;
 }

@@ -3,11 +3,11 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <iostream>
 
-class TextureManager
-{
+class TextureManager {
 public:
-    static SDL_Texture *Texture(const char *filelocation, SDL_Renderer *ren);
+    static SDL_Texture* Texture(const char* filename, SDL_Renderer* renderer);
 };
 
-#endif
+#endif // TEXTUREMANAGER_H
