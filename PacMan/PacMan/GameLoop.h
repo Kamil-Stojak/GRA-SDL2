@@ -32,6 +32,7 @@ private:
     SDL_Renderer* renderer;
     SDL_Texture* playerTextures[ANIMATION_FRAMES];
     SDL_Texture* background;
+    SDL_Texture* CHMORA;
     SDL_Texture* blockTexture;
     SDL_Texture* hurdleTexture;
     SDL_Texture* gameOverBackground;
@@ -48,10 +49,17 @@ private:
     int jumpCount;
     int animationCounter;
     int currentFrame;
-
+    int speed;
+    int licz;
+    int P;
+    int CHMORAA;
+    int DAY;
+    int WCHMORA;
+    void CHMORKA();
     void UpdateBlocksAndHurdles();
     void CheckCollisions();
     void RenderScore();
+    void RenderSpeed();
     void RenderGameOver();
     void InitializeGame();
 };

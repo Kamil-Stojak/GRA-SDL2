@@ -12,6 +12,11 @@ GameLoop::GameLoop() {
     isGameOver = false;
     animationCounter = 0;
     currentFrame = 0;
+    speed = 20;
+    licz = 1;
+    CHMORAA = 1;
+    WCHMORA = 50;
+    DAY = 1;
 }
 
 GameLoop::~GameLoop() {
@@ -39,6 +44,7 @@ void GameLoop::Intialize() {
             playerTextures[0] = TextureManager::Texture("Image/shiba1.png", renderer);
             playerTextures[1] = TextureManager::Texture("Image/shiba2.png", renderer);
             background = TextureManager::Texture("Image/TLO2.png", renderer);
+            CHMORA = TextureManager::Texture("Image/CHMORA.png", renderer);
             blockTexture = TextureManager::Texture("Image/KOSTKA.png", renderer);
             hurdleTexture = TextureManager::Texture("Image/PLOTEK.png", renderer);
             gameOverBackground = TextureManager::Texture("Image/TLO.png", renderer);
@@ -48,7 +54,7 @@ void GameLoop::Intialize() {
             }
 
             // Obsługa błędów ładowania tekstur
-            if (!playerTextures[0] || !playerTextures[1] || !background || !blockTexture || !hurdleTexture || !gameOverBackground) {
+            if (!playerTextures[0] || !playerTextures[1] || !background || !CHMORA || !blockTexture || !hurdleTexture || !gameOverBackground) {
                 std::cout << "Failed to load textures" << std::endl;
                 GameState = false;
                 return;
@@ -115,7 +121,15 @@ void GameLoop::Update() {
     CheckCollisions();// Sprawdzenie kolizji postaci z przeszkodami
     
     static int scoreCounter = 0;
+    static int P = 0;
     scoreCounter++;
+    CHMORAA++;
+    if(CHMORAA == 900)
+{
+CHMORAA = -100 ;
+}else{
+}
+
 
     // Zwiększenie punktacji co 30 klatek gry
     if (!isGameOver && scoreCounter >= 30) {
@@ -123,9 +137,20 @@ void GameLoop::Update() {
         scoreCounter = 0;
     }
 
-    SDL_Delay(20);// Opóźnienie gry dla płynniejszego działania
+if (P >= 300 * licz && speed > 10) {
+            speed -= 1;
+            licz++;
+            P = 0;
+            DAY++ ;
+        }else{
+    P++;
+        }
 
+
+
+    SDL_Delay(speed);// Opóźnienie gry dla płynniejszego działania
     // Logika animacji
+
     animationCounter++;
     if (animationCounter >= ANIMATION_SPEED) {
         currentFrame++;
@@ -152,7 +177,6 @@ void GameLoop::UpdateBlocksAndHurdles() {
         }
     }
 }
-
 // Sprawdzenie kolizji postaci z przeszkodami
 void GameLoop::CheckCollisions() {
     for (const auto& hurdle : hurdles) {
@@ -176,7 +200,15 @@ void GameLoop::Render() {
     for (const auto& hurdle : hurdles) {
         SDL_RenderCopy(renderer, hurdleTexture, NULL, &hurdle);
     }
+int chmoraWidth = 100;
+int chmoraHeight = 30;
 
+     SDL_Rect chmoraRect = { CHMORAA, WCHMORA , chmoraWidth, chmoraHeight };
+     SDL_Rect chmoraRect2 = { CHMORAA/2, WCHMORA , chmoraWidth, chmoraHeight };
+     SDL_Rect chmoraRect3 = { CHMORAA/3, WCHMORA , chmoraWidth, chmoraHeight };
+    SDL_RenderCopy(renderer, CHMORA, NULL, &chmoraRect);
+    SDL_RenderCopy(renderer, CHMORA, NULL, &chmoraRect2);
+    SDL_RenderCopy(renderer, CHMORA, NULL, &chmoraRect3);
     // Renderowanie postaci
     SDL_RenderCopy(renderer, playerTextures[currentFrame], &srcPlayer, &destPlayer);
 
@@ -186,6 +218,7 @@ void GameLoop::Render() {
         RenderGameOver();// Renderowanie wyniku na ekranie Game Over
     } else {
         RenderScore();// Renderowanie wyniku w trakcie rozgrywki
+        RenderSpeed();// Renderuj wynik prędkości
     }
 
     SDL_RenderPresent(renderer);
@@ -196,7 +229,7 @@ void GameLoop::RenderScore() {
     int tempScore = score;
     int digitX = WIDTH / 2 - 35;
     int digitWidth = 20;
-
+    
     // Renderowanie cyfr wyniku na ekranie
     do {
         int digit = tempScore % 10;
@@ -207,6 +240,19 @@ void GameLoop::RenderScore() {
     } while (tempScore > 0);
 }
 
+void GameLoop::RenderSpeed(){
+
+    int tempSpeed = DAY;
+    int digitX = 50;
+    int digitWidth = 20;
+    do {
+        int digit = tempSpeed % 10;
+        SDL_Rect dest = { digitX, 70, digitWidth, 30 };
+        SDL_RenderCopy(renderer, digits[digit], NULL, &dest);
+        digitX -= digitWidth + 5;
+        tempSpeed /= 10;
+    } while (tempSpeed > 0);
+}
 // Renderowanie wyniku na ekranie Game Over
 void GameLoop::RenderGameOver() {
     int tempScore = score;
@@ -229,6 +275,7 @@ void GameLoop::Clear() {
     for (int i = 0; i < ANIMATION_FRAMES; ++i) {
         SDL_DestroyTexture(playerTextures[i]);
     }
+    SDL_DestroyTexture(CHMORA);
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(blockTexture);
     SDL_DestroyTexture(hurdleTexture);
