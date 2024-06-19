@@ -8,8 +8,12 @@
 #include <string>
 #include "TextureManager.h"
 
+//rozdzielczość
 const int WIDTH = 800;
 const int HEIGHT = 600;
+
+const int ANIMATION_FRAMES = 2; // Liczba klatek animacji
+const int ANIMATION_SPEED = 10;
 
 class GameLoop {
 public:
@@ -26,7 +30,7 @@ public:
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
-    SDL_Texture* player;
+    SDL_Texture* playerTextures[ANIMATION_FRAMES];
     SDL_Texture* background;
     SDL_Texture* blockTexture;
     SDL_Texture* hurdleTexture;
@@ -42,6 +46,8 @@ private:
     bool isJumping;
     int score;
     int jumpCount;
+    int animationCounter;
+    int currentFrame;
 
     void UpdateBlocksAndHurdles();
     void CheckCollisions();
@@ -50,4 +56,4 @@ private:
     void InitializeGame();
 };
 
-#endif // GAMELOOP_H
+#endif

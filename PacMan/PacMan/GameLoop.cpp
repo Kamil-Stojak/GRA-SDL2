@@ -10,6 +10,8 @@ GameLoop::GameLoop() {
     score = 0;
     jumpCount = 0;
     isGameOver = false;
+    animationCounter = 0;
+    currentFrame = 0;
 }
 
 GameLoop::~GameLoop() {
@@ -26,15 +28,16 @@ void GameLoop::Intialize() {
         return;
     }
 
-// Tworzenie okna
+    // Tworzenie okna
     window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
     if (window) {
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
             std::cout << "Initialization successful" << std::endl;
 
-            // Ładowanie tekstur
-            player = TextureManager::Texture("Image/shiba2.png", renderer);
+            // Ładowanie tekstur postaci
+            playerTextures[0] = TextureManager::Texture("Image/shiba1.png", renderer);
+            playerTextures[1] = TextureManager::Texture("Image/shiba2.png", renderer);
             background = TextureManager::Texture("Image/TLO2.png", renderer);
             blockTexture = TextureManager::Texture("Image/KOSTKA.png", renderer);
             hurdleTexture = TextureManager::Texture("Image/PLOTEK.png", renderer);
@@ -45,7 +48,7 @@ void GameLoop::Intialize() {
             }
 
             // Obsługa błędów ładowania tekstur
-            if (!player || !background || !blockTexture || !hurdleTexture || !gameOverBackground) {
+            if (!playerTextures[0] || !playerTextures[1] || !background || !blockTexture || !hurdleTexture || !gameOverBackground) {
                 std::cout << "Failed to load textures" << std::endl;
                 GameState = false;
                 return;
@@ -60,7 +63,7 @@ void GameLoop::Intialize() {
                 SDL_Rect hurdle = { i * 200 + rand() % 200, HEIGHT - 70, 20, 60 };
                 hurdles.push_back(hurdle);
             }
-            GameState = true;//<------- Gra jest gotowa do uruchomienia w tym miejscu
+            GameState = true;// Gra jest gotowa do uruchomienia w tym miejscu
         } else {
             std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl;
         }
@@ -75,7 +78,7 @@ void GameLoop::Event() {
         GameState = false;// Zamknięcie gry przy wyjściu z okna
     }
 
-    //skakanie
+    // Skakanie
     if (!isGameOver && event1.type == SDL_KEYDOWN && event1.key.keysym.sym == SDLK_SPACE && jumpCount < 2) {
         isJumping = true;
         playerYVelocity = -15;
@@ -83,9 +86,8 @@ void GameLoop::Event() {
     }
 }
 
-//ruch postaci, kolizje, punkty
+// Ruch postaci, kolizje, punkty
 void GameLoop::Update() {
-
     // Ustawienia graficzne postaci w px
     srcPlayer.h = 31;
     srcPlayer.w = 27;
@@ -95,10 +97,10 @@ void GameLoop::Update() {
     destPlayer.h = 31;  
     destPlayer.x = 10;
     if (destPlayer.y == 0) {
-        destPlayer.y = HEIGHT - 75;//położenia postaci
+        destPlayer.y = HEIGHT - 75;// Położenia postaci
     }
 
-// Obsługa skoku postaci
+    // Obsługa skoku postaci
     if (!isGameOver && isJumping) {
         destPlayer.y += playerYVelocity;
         playerYVelocity += 1;
@@ -122,6 +124,16 @@ void GameLoop::Update() {
     }
 
     SDL_Delay(20);// Opóźnienie gry dla płynniejszego działania
+
+    // Logika animacji
+    animationCounter++;
+    if (animationCounter >= ANIMATION_SPEED) {
+        currentFrame++;
+        if (currentFrame >= ANIMATION_FRAMES) {
+            currentFrame = 0;
+        }
+        animationCounter = 0;
+    }
 }
 
 // Aktualizacja pozycji bloków i przeszkód
@@ -137,7 +149,6 @@ void GameLoop::UpdateBlocksAndHurdles() {
         hurdle.x -= 2;
         if (hurdle.x < -40) {
             hurdle.x = WIDTH + rand() % 200;// Przesunięcie przeszkody na początek ekranu po opuszczeniu go
-
         }
     }
 }
@@ -157,7 +168,7 @@ void GameLoop::Render() {
     SDL_RenderClear(renderer);// Wyczyszczenie renderera
     SDL_RenderCopy(renderer, background, NULL, NULL);// Renderowanie tła gry
 
-// Renderowanie bloków
+    // Renderowanie bloków
     for (const auto& block : blocks) {
         SDL_RenderCopy(renderer, blockTexture, NULL, &block);
     }
@@ -166,8 +177,8 @@ void GameLoop::Render() {
         SDL_RenderCopy(renderer, hurdleTexture, NULL, &hurdle);
     }
 
-// Renderowanie postaci
-    SDL_RenderCopy(renderer, player, &srcPlayer, &destPlayer);
+    // Renderowanie postaci
+    SDL_RenderCopy(renderer, playerTextures[currentFrame], &srcPlayer, &destPlayer);
 
     // Jeśli gra jest zakończona "renderuj ekran Game Over"
     if (isGameOver) {
@@ -195,6 +206,7 @@ void GameLoop::RenderScore() {
         tempScore /= 10;
     } while (tempScore > 0);
 }
+
 // Renderowanie wyniku na ekranie Game Over
 void GameLoop::RenderGameOver() {
     int tempScore = score;
@@ -211,9 +223,12 @@ void GameLoop::RenderGameOver() {
         tempScore /= 10;
     } while (tempScore > 0);
 }
+
 // Zwalnianie zasobów pamięci
 void GameLoop::Clear() {
-    SDL_DestroyTexture(player);
+    for (int i = 0; i < ANIMATION_FRAMES; ++i) {
+        SDL_DestroyTexture(playerTextures[i]);
+    }
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(blockTexture);
     SDL_DestroyTexture(hurdleTexture);
