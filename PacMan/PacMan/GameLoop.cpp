@@ -197,12 +197,19 @@ void GameLoop::RenderScore() {
 }
 // Renderowanie wyniku na ekranie Game Over
 void GameLoop::RenderGameOver() {
+    int tempScore = score;
     int digitX = WIDTH / 2 - 35;
     int digitY = HEIGHT / 2 + 50;
     int digitWidth = 20;
 
-    SDL_Rect dest = { digitX, digitY, digitWidth, 30 };
-    SDL_RenderCopy(renderer, digits[score % 10], NULL, &dest);
+    // Renderowanie cyfr wyniku na ekranie Game Over
+    do {
+        int digit = tempScore % 10;
+        SDL_Rect dest = { digitX, digitY, digitWidth, 30 };
+        SDL_RenderCopy(renderer, digits[digit], NULL, &dest);
+        digitX -= digitWidth + 5;
+        tempScore /= 10;
+    } while (tempScore > 0);
 }
 // Zwalnianie zasobów pamięci
 void GameLoop::Clear() {
